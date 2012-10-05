@@ -14,3 +14,8 @@ API-Level 8 (Android 2.2 - Froyo) is required in order to use this view.
 
 You can run this project as an Android application in order to see its behaviour. But genereally spoken it behaves just
 like facebook's imageview.
+
+## ToDo:
+* Backwards compatibility down to 1.6
+* Simplify scaling process ([affected code on github] (https://github.com/Taig/MultitouchImageView/blob/master/src/com/taig/widget/MultitouchImageView.java#L174),
+[respective question on stackoverflow] (http://stackoverflow.com/questions/12749802/how-does-matrix-scaling-work))
