@@ -19,3 +19,4 @@ like facebook's imageview.
 * Backwards compatibility down to 1.6
 * Simplify scaling process ([affected code on github] (https://github.com/Taig/MultitouchImageView/blob/master/src/com/taig/widget/MultitouchImageView.java#L174),
 [respective question on stackoverflow] (http://stackoverflow.com/questions/12749802/how-does-matrix-scaling-work))
+* Provide smoother scrolling
