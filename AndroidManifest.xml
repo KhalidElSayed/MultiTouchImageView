@@ -18,12 +18,8 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".app.Simple" >
-			<intent-filter>
-			</intent-filter>
-		</activity>
-		<activity android:name=".app.Advanced" >
-		</activity>
+		<activity android:name=".app.Simple" />
+		<activity android:name=".app.Advanced" />
 	</application>
 
 </manifest>
