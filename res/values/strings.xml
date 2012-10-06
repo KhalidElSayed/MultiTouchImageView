@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">MultitouchImageView</string>
+
+	<string name="app_name">MultitouchImageView</string>
+	<string name="btn_simple">Simple</string>
+	<string name="btn_advanced">Advanced</string>
+
 </resources>
