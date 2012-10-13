@@ -217,6 +217,8 @@ public class MultitouchImageView extends ImageView
 		scaleMatrix.set( getImageMatrix() );
 		scaleMatrix.postScale( scale, scale, x, y );
 		scaleMatrix.getValues( scaleMatrixValues );
+		
+		setLastScale( scale );
 
 		matrixValues[Matrix.MSCALE_X] = scaleMatrixValues[Matrix.MSCALE_X];
 		matrixValues[Matrix.MSCALE_Y] = scaleMatrixValues[Matrix.MSCALE_Y];
