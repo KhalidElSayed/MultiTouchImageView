@@ -84,6 +84,18 @@ public class MultitouchImageView extends ImageView
 		this.doubleTapScale = doubleTapScale;
 	}
 
+	public float getCurrentScale()
+	{
+		return matrixValues[Matrix.MSCALE_X];
+	}
+
+	public void setCurrentScale( float scale )
+	{
+		this.matrixValues[Matrix.MSCALE_X] = scale;
+		this.matrixValues[Matrix.MSCALE_Y] = scale;
+		getImageMatrix().setValues( this.matrixValues );
+	}
+
 	public void setLastTouch( PointF lastTouch )
 	{
 		this.lastTouch = lastTouch;
@@ -176,7 +188,7 @@ public class MultitouchImageView extends ImageView
 		matrixValues[Matrix.MTRANS_X] = getTranslation(
 			Axis.X,
 			getDrawable().getIntrinsicWidth(),
-			matrixValues[Matrix.MSCALE_X],
+			getCurrentScale(),
 			getMeasuredWidth(),
 			matrixValues[Matrix.MTRANS_X],
 			deltaX );
@@ -184,7 +196,7 @@ public class MultitouchImageView extends ImageView
 		matrixValues[Matrix.MTRANS_Y] = getTranslation(
 			Axis.Y,
 			getDrawable().getIntrinsicHeight(),
-			matrixValues[Matrix.MSCALE_Y],
+			getCurrentScale(),
 			getMeasuredHeight(),
 			matrixValues[Matrix.MTRANS_Y],
 			deltaY );
@@ -213,11 +225,11 @@ public class MultitouchImageView extends ImageView
 	{
 		if( scale > 1 )
 		{
-			scale = Math.min( scale, maxScale / matrixValues[Matrix.MSCALE_X] );
+			scale = Math.min( scale, maxScale / getCurrentScale() );
 		}
 		else if( scale < 1 )
 		{
-			scale = Math.max( scale, initialStateValues[Matrix.MSCALE_X] / matrixValues[Matrix.MSCALE_X] );
+			scale = Math.max( scale, initialStateValues[Matrix.MSCALE_X] / getCurrentScale() );
 		}
 
 		// Perform scaling on a separate matrix to prevent its translations from
@@ -227,9 +239,7 @@ public class MultitouchImageView extends ImageView
 		scaleMatrix.getValues( scaleMatrixValues );
 
 		setLastScale( scale );
-
-		matrixValues[Matrix.MSCALE_X] = scaleMatrixValues[Matrix.MSCALE_X];
-		matrixValues[Matrix.MSCALE_Y] = scaleMatrixValues[Matrix.MSCALE_Y];
+		setCurrentScale( scaleMatrixValues[Matrix.MSCALE_X] );
 
 		translate(
 			scaleMatrixValues[Matrix.MTRANS_X] - matrixValues[Matrix.MTRANS_X],
@@ -250,6 +260,7 @@ public class MultitouchImageView extends ImageView
 				public boolean onDoubleTap( MotionEvent event )
 				{
 					scale( doubleTapScale, event.getX(), event.getY() );
+
 					return true;
 				}
 			} );
