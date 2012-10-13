@@ -31,6 +31,10 @@ public class MultitouchImageView extends ImageView
 
 	private float[]	scaleMatrixValues	= new float[9];
 
+	private PointF	lastTouch;
+
+	private float	lastScale			= 1;
+
 	public MultitouchImageView( Context context )
 	{
 		this( context, null );
@@ -63,6 +67,31 @@ public class MultitouchImageView extends ImageView
 	public void setMinScale( float minScale )
 	{
 		this.minScale = minScale;
+	}
+	
+	public PointF getLastTouch()
+	{
+		return lastTouch;
+	}
+
+	public void setLastTouch( PointF lastTouch )
+	{
+		this.lastTouch = lastTouch;
+	}
+	
+	public void setLastTouch( MotionEvent event )
+	{
+		this.lastTouch = new PointF( event.getX(), event.getY() );
+	}
+
+	public float getLastScale()
+	{
+		return lastScale;
+	}
+
+	public void setLastScale( float lastScale )
+	{
+		this.lastScale = lastScale;
 	}
 
 	/**
@@ -185,8 +214,6 @@ public class MultitouchImageView extends ImageView
 
 	protected class TouchListener implements OnTouchListener
 	{
-		private PointF					lastTouch	= new PointF();
-
 		private GestureDetector			doubleTapDetector;
 
 		private ScaleGestureDetector	scaleDetector;
@@ -212,16 +239,6 @@ public class MultitouchImageView extends ImageView
 					return true;
 				}
 			} );
-		}
-
-		public PointF getLastTouch()
-		{
-			return lastTouch;
-		}
-
-		public void setLastTouch( PointF lastTouch )
-		{
-			this.lastTouch = lastTouch;
 		}
 
 		public GestureDetector getDoubleTapDetector()
@@ -272,11 +289,6 @@ public class MultitouchImageView extends ImageView
 			invalidate();
 
 			return true;
-		}
-
-		private void setLastTouch( MotionEvent event )
-		{
-			this.lastTouch.set( event.getX(), event.getY() );
 		}
 	}
 }
