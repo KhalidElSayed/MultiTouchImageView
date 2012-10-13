@@ -21,6 +21,8 @@ public class MultitouchImageView extends ImageView
 
 	private float	minScale			= 1f;
 
+	private float	doubleTapScale		= 2.5f;
+
 	private Matrix	initialState		= new Matrix();
 
 	private float[]	initialStateValues	= new float[9];
@@ -69,6 +71,18 @@ public class MultitouchImageView extends ImageView
 		this.minScale = minScale;
 	}
 	
+	
+
+	public float getDoubleTapScale()
+	{
+		return doubleTapScale;
+	}
+
+	public void setDoubleTapScale( float doubleTapScale )
+	{
+		this.doubleTapScale = doubleTapScale;
+	}
+
 	public PointF getLastTouch()
 	{
 		return lastTouch;
@@ -78,7 +92,7 @@ public class MultitouchImageView extends ImageView
 	{
 		this.lastTouch = lastTouch;
 	}
-	
+
 	public void setLastTouch( MotionEvent event )
 	{
 		this.lastTouch = new PointF( event.getX(), event.getY() );
@@ -225,7 +239,7 @@ public class MultitouchImageView extends ImageView
 				@Override
 				public boolean onDoubleTap( MotionEvent event )
 				{
-					scale( 2f, event.getX(), event.getY() );
+					scale( doubleTapScale, event.getX(), event.getY() );
 					return true;
 				}
 			} );
