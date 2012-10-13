@@ -89,13 +89,6 @@ public class MultitouchImageView extends ImageView
 		return matrixValues[Matrix.MSCALE_X];
 	}
 
-	public void setCurrentScale( float scale )
-	{
-		this.matrixValues[Matrix.MSCALE_X] = scale;
-		this.matrixValues[Matrix.MSCALE_Y] = scale;
-		getImageMatrix().setValues( this.matrixValues );
-	}
-
 	public void setLastTouch( PointF lastTouch )
 	{
 		this.lastTouch = lastTouch;
@@ -239,7 +232,9 @@ public class MultitouchImageView extends ImageView
 		scaleMatrix.getValues( scaleMatrixValues );
 
 		setLastScale( scale );
-		setCurrentScale( scaleMatrixValues[Matrix.MSCALE_X] );
+
+		matrixValues[Matrix.MSCALE_X] = scaleMatrixValues[Matrix.MSCALE_X];
+		matrixValues[Matrix.MSCALE_Y] = scaleMatrixValues[Matrix.MSCALE_Y];
 
 		translate(
 			scaleMatrixValues[Matrix.MTRANS_X] - matrixValues[Matrix.MTRANS_X],
