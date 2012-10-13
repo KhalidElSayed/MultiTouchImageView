@@ -86,14 +86,15 @@ public class MultitouchImageView extends ImageView
 		return lastTouch;
 	}
 
-	public void setLastTouch( PointF lastTouch )
+	public void setLastTouch( float x, float y )
 	{
-		this.lastTouch = lastTouch;
+		this.lastTouch.x = x;
+		this.lastTouch.y = y;
 	}
 
 	public void setLastTouch( MotionEvent event )
 	{
-		this.lastTouch = new PointF( event.getX(), event.getY() );
+		this.setLastTouch( event.getX(), event.getY() );
 	}
 
 	public float getLastScale()
@@ -180,7 +181,7 @@ public class MultitouchImageView extends ImageView
 			matrixValues[Matrix.MTRANS_Y],
 			deltaY );
 
-		setLastTouch( new PointF( getLastTouch().x + deltaX, getLastTouch().y + deltaY ) );
+		setLastTouch( getLastTouch().x + deltaX, getLastTouch().y + deltaY );
 		getImageMatrix().setValues( matrixValues );
 	}
 
