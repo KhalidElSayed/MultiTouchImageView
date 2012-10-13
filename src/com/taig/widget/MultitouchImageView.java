@@ -33,7 +33,7 @@ public class MultitouchImageView extends ImageView
 
 	private float[]	scaleMatrixValues	= new float[9];
 
-	private PointF	lastTouch;
+	private PointF	lastTouch			= new PointF( 0, 0 );
 
 	private float	lastScale			= 1;
 
@@ -70,8 +70,6 @@ public class MultitouchImageView extends ImageView
 	{
 		this.minScale = minScale;
 	}
-	
-	
 
 	public float getDoubleTapScale()
 	{
@@ -182,6 +180,7 @@ public class MultitouchImageView extends ImageView
 			matrixValues[Matrix.MTRANS_Y],
 			deltaY );
 
+		setLastTouch( new PointF( getLastTouch().x + deltaX, getLastTouch().y + deltaY ) );
 		getImageMatrix().setValues( matrixValues );
 	}
 
@@ -217,7 +216,7 @@ public class MultitouchImageView extends ImageView
 		scaleMatrix.set( getImageMatrix() );
 		scaleMatrix.postScale( scale, scale, x, y );
 		scaleMatrix.getValues( scaleMatrixValues );
-		
+
 		setLastScale( scale );
 
 		matrixValues[Matrix.MSCALE_X] = scaleMatrixValues[Matrix.MSCALE_X];
@@ -286,19 +285,21 @@ public class MultitouchImageView extends ImageView
 			scaleDetector.onTouchEvent( event );
 
 			// Manage the actual drag-event.
-			switch( event.getAction() )
+			if( !scaleDetector.isInProgress() )
 			{
-				case MotionEvent.ACTION_DOWN:
-					// Store touch position as point on first interaction.
-					setLastTouch( event );
-				break;
+				switch( event.getAction() )
+				{
+					case MotionEvent.ACTION_DOWN:
+						// Store touch position as point on first interaction.
+						setLastTouch( event );
+					break;
 
-				case MotionEvent.ACTION_MOVE:
-					// Translate each movement event into the image matrix
-					// and update the last touched position afterwards.
-					translate( event.getX() - lastTouch.x, event.getY() - lastTouch.y );
-					setLastTouch( event );
-				break;
+					case MotionEvent.ACTION_MOVE:
+						// Translate each movement event into the image matrix
+						// and update the last touched position afterwards.
+						translate( event.getX() - lastTouch.x, event.getY() - lastTouch.y );
+					break;
+				}
 			}
 
 			// Enforce the view to be redrawn.
