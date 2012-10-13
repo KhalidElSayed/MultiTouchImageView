@@ -21,7 +21,7 @@ public class MultitouchImageView extends ImageView
 
 	private float			minScale			= 1f;
 
-	private float			doubleTapScale		= 2.5f;
+	private float			doubleTapScale		= 2f;
 
 	private TouchListener	touchListener;
 
@@ -259,7 +259,16 @@ public class MultitouchImageView extends ImageView
 				@Override
 				public boolean onDoubleTap( MotionEvent event )
 				{
-					scale( doubleTapScale, event.getX(), event.getY() );
+					if( getCurrentScale() > initialStateValues[Matrix.MSCALE_X] )
+					{
+						// Zoom out.
+						scale( initialStateValues[Matrix.MSCALE_X] / getCurrentScale(), event.getX(), event.getY() );
+					}
+					else
+					{
+						// Zoom in.
+						scale( doubleTapScale / getCurrentScale(), event.getX(), event.getY() );
+					}
 
 					return true;
 				}
