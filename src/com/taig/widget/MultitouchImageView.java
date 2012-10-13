@@ -17,25 +17,27 @@ public class MultitouchImageView extends ImageView
 		X, Y;
 	}
 
-	private float	maxScale			= 3.5f;
+	private float			maxScale			= 3.5f;
 
-	private float	minScale			= 1f;
+	private float			minScale			= 1f;
 
-	private float	doubleTapScale		= 2.5f;
+	private float			doubleTapScale		= 2.5f;
 
-	private Matrix	initialState		= new Matrix();
+	private TouchListener	touchListener;
 
-	private float[]	initialStateValues	= new float[9];
+	private Matrix			initialState		= new Matrix();
 
-	private float[]	matrixValues		= new float[9];
+	private float[]			initialStateValues	= new float[9];
 
-	private Matrix	scaleMatrix			= new Matrix();
+	private float[]			matrixValues		= new float[9];
 
-	private float[]	scaleMatrixValues	= new float[9];
+	private Matrix			scaleMatrix			= new Matrix();
 
-	private PointF	lastTouch			= new PointF( 0, 0 );
+	private float[]			scaleMatrixValues	= new float[9];
 
-	private float	lastScale			= 1;
+	private PointF			lastTouch			= new PointF( 0, 0 );
+
+	private float			lastScale			= 1;
 
 	public MultitouchImageView( Context context )
 	{
@@ -48,7 +50,8 @@ public class MultitouchImageView extends ImageView
 
 		this.setImageMatrix( new Matrix() );
 		this.setScaleType( ScaleType.MATRIX );
-		this.setOnTouchListener( new TouchListener( context ) );
+		this.touchListener = new TouchListener( context );
+		this.setOnTouchListener( this.touchListener );
 	}
 
 	public float getMaxScale()
@@ -79,6 +82,11 @@ public class MultitouchImageView extends ImageView
 	public void setDoubleTapScale( float doubleTapScale )
 	{
 		this.doubleTapScale = doubleTapScale;
+	}
+
+	public void setLastTouch( PointF lastTouch )
+	{
+		this.lastTouch = lastTouch;
 	}
 
 	public PointF getLastTouch()
