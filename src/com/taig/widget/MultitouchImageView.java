@@ -10,6 +10,10 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.ImageView;
 
+/**
+ * An extension of android's native {@link ImageView} supporting pinch-zoom,
+ * double-tap-zoom and exploring the image via drag-gestures.
+ */
 public class MultitouchImageView extends ImageView
 {
 	public enum Axis
@@ -17,26 +21,60 @@ public class MultitouchImageView extends ImageView
 		X, Y;
 	}
 
+	/**
+	 * The maximum allowed scale factor.
+	 */
 	private float			maxScale			= 3.5f;
 
+	/**
+	 * The minimum allowed scale factor.
+	 */
 	private float			minScale			= 1f;
 
+	/**
+	 * Maximum scale factor for double taps.
+	 */
 	private float			doubleTapScale		= 2f;
 
+	/**
+	 * The {@link TouchListener} that manages drag, pinch and scale gestures.
+	 */
 	private TouchListener	touchListener;
 
+	/**
+	 * The image's initial (after {@link #onMeasure(int, int)} was performed)
+	 * state matrix representation.
+	 */
 	private Matrix			initialState		= new Matrix();
 
+	/**
+	 * The {@link #initialState} in array representation.
+	 */
 	private float[]			initialStateValues	= new float[9];
 
+	/**
+	 * The array representation of the currently active image {@link Matrix}.
+	 */
 	private float[]			matrixValues		= new float[9];
 
+	/**
+	 * An additional {@link Matrix} used for scaling.
+	 */
 	private Matrix			scaleMatrix			= new Matrix();
 
+	/**
+	 * The {@link #scaleMatrix} in array representation.
+	 */
 	private float[]			scaleMatrixValues	= new float[9];
 
+	/**
+	 * The position of the user's last touch.
+	 */
 	private PointF			lastTouch			= new PointF( 0, 0 );
 
+	/**
+	 * The recently applied scaling.
+	 */
 	private float			lastScale			= 1;
 
 	public MultitouchImageView( Context context )
