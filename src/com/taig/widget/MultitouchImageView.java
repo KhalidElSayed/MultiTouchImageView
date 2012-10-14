@@ -1,5 +1,7 @@
 package com.taig.widget;
 
+import java.util.Arrays;
+
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.PointF;
@@ -162,7 +164,8 @@ public class MultitouchImageView extends ImageView
 	 */
 	public boolean reset()
 	{
-		if( matrixValues.equals( initialStateValues ) )
+		getImageMatrix().getValues( matrixValues );
+		if( Arrays.equals( matrixValues, initialStateValues ) )
 		{
 			return false;
 		}
