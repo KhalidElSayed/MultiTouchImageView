@@ -24,7 +24,7 @@ public class Advanced extends Activity
 		imageView = new MultitouchImageView( this )
 		{
 			@Override
-			protected float getScale( int width, int height )
+			protected float getInitialScale( int width, int height )
 			{
 				// Stretch image to always fill the view's width.
 				return width / (float) getDrawable().getIntrinsicWidth();

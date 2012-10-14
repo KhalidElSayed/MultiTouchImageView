@@ -126,7 +126,7 @@ public class MultitouchImageView extends ImageView
 	{
 		return matrixValues[Matrix.MSCALE_X];
 	}
-	
+
 	public PointF getLastTouch()
 	{
 		return lastTouch;
@@ -186,14 +186,21 @@ public class MultitouchImageView extends ImageView
 			getImageMatrix().getValues( matrixValues );
 
 			// Scale image to match parent.
-			scale( getScale( width, height ), 0, 0 );
+			scale( getInitialScale( width, height ), 0, 0 );
 
 			// Store this position as initial position.
 			getImageMatrix().getValues( this.initialStateValues );
 		}
 	}
 
-	protected float getScale( int viewWidth, int viewHeight )
+	/**
+	 * Get the initial scale factor to match the parent's width or height.
+	 * 
+	 * @param viewWidth
+	 * @param viewHeight
+	 * @return
+	 */
+	protected float getInitialScale( int viewWidth, int viewHeight )
 	{
 		return Math.min( viewWidth / (float) getDrawable().getIntrinsicWidth(), viewHeight / (float) getDrawable().getIntrinsicHeight() );
 	}
