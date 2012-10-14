@@ -43,12 +43,7 @@ public class MultitouchImageView extends ImageView
 
 	/**
 	 * The image's initial (after {@link #onMeasure(int, int)} was performed)
-	 * state matrix representation.
-	 */
-	private Matrix			initialState		= new Matrix();
-
-	/**
-	 * The {@link #initialState} in array representation.
+	 * state array representation.
 	 */
 	private float[]			initialStateValues	= new float[9];
 
@@ -161,17 +156,19 @@ public class MultitouchImageView extends ImageView
 	/**
 	 * Reset the drawable's position and size to its original condition.
 	 * 
-	 * @return
+	 * @return <code>true</code> if the current image matrix has been adjusted
+	 *         to the initial matrix. <code>false</code> if the current image
+	 *         matrix has already been reset.
 	 */
 	public boolean reset()
 	{
-		if( getImageMatrix().equals( initialState ) )
+		if( matrixValues.equals( initialStateValues ) )
 		{
 			return false;
 		}
 		else
 		{
-			getImageMatrix().set( initialState );
+			getImageMatrix().setValues( initialStateValues );
 			invalidate();
 			return true;
 		}
@@ -184,7 +181,7 @@ public class MultitouchImageView extends ImageView
 		int height = MeasureSpec.getSize( heightMeasureSpec );
 		setMeasuredDimension( width, height );
 
-		if( getDrawable() != null && initialState.isIdentity() )
+		if( getDrawable() != null && getImageMatrix().isIdentity() )
 		{
 			getImageMatrix().getValues( matrixValues );
 
@@ -192,8 +189,7 @@ public class MultitouchImageView extends ImageView
 			scale( getScale( width, height ), 0, 0 );
 
 			// Store this position as initial position.
-			this.initialState.set( getImageMatrix() );
-			this.initialState.getValues( this.initialStateValues );
+			getImageMatrix().getValues( this.initialStateValues );
 		}
 	}
 
