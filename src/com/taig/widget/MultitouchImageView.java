@@ -219,7 +219,7 @@ public class MultitouchImageView extends ImageView
 	 */
 	protected float getOffset( Axis axis, int viewSize, int drawableSize, float scale )
 	{
-		if( axis.equals( Axis.X ) )
+		if( axis == Axis.X )
 		{
 			return ( viewSize - drawableSize * scale ) / 2;
 		}
