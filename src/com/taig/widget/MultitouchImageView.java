@@ -117,16 +117,16 @@ public class MultitouchImageView extends ImageView
 		this.doubleTapScale = doubleTapScale;
 	}
 
+	/**
+	 * Get the image's current scale factor.
+	 * 
+	 * @return
+	 */
 	public float getCurrentScale()
 	{
 		return matrixValues[Matrix.MSCALE_X];
 	}
-
-	public void setLastTouch( PointF lastTouch )
-	{
-		this.lastTouch = lastTouch;
-	}
-
+	
 	public PointF getLastTouch()
 	{
 		return lastTouch;
