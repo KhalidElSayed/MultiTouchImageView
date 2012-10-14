@@ -252,6 +252,19 @@ public class MultitouchImageView extends ImageView
 			this.doubleTapDetector = new GestureDetector( context, new GestureDetector.SimpleOnGestureListener()
 			{
 				@Override
+				public boolean onSingleTapConfirmed( MotionEvent event )
+				{
+					performClick();
+					return true;
+				}
+				
+				@Override
+				public void onLongPress( MotionEvent event )
+				{
+					performLongClick();
+				}
+
+				@Override
 				public boolean onDoubleTap( MotionEvent event )
 				{
 					if( getCurrentScale() > initialStateValues[Matrix.MSCALE_X] )

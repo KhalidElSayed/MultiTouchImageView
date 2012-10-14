@@ -3,7 +3,11 @@ package com.taig.app;
 import android.app.Activity;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.FrameLayout.LayoutParams;
+import android.widget.Toast;
 
 import com.taig.R;
 import com.taig.widget.MultitouchImageView;
@@ -52,6 +56,23 @@ public class Advanced extends Activity
 		imageView.setLayoutParams( new LayoutParams( LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT ) );
 		imageView.setImageDrawable( getResources().getDrawable( R.drawable.porn ) );
 		imageView.setBackgroundColor( getResources().getColor( android.R.color.black ) );
+		imageView.setOnClickListener( new OnClickListener()
+		{
+			@Override
+			public void onClick( View view )
+			{
+				Toast.makeText( Advanced.this, "Click event.", Toast.LENGTH_SHORT ).show();
+			}
+		} );
+		imageView.setOnLongClickListener( new OnLongClickListener()
+		{
+			@Override
+			public boolean onLongClick( View view )
+			{
+				Toast.makeText( Advanced.this, "LongClick event.", Toast.LENGTH_SHORT ).show();
+				return true;
+			}
+		} );
 
 		setContentView( imageView );
 	}
