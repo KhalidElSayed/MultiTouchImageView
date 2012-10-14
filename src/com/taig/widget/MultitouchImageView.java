@@ -63,9 +63,9 @@ public class MultitouchImageView extends ImageView
 	private float[]			scaleMatrixValues	= new float[9];
 
 	/**
-	 * The position of the user's last touch.
+	 * The position of the last pointer interaction.
 	 */
-	private PointF			lastTouch			= new PointF( 0, 0 );
+	private PointF			lastPosition		= new PointF( 0, 0 );
 
 	/**
 	 * The recently applied scaling.
@@ -127,20 +127,20 @@ public class MultitouchImageView extends ImageView
 		return matrixValues[Matrix.MSCALE_X];
 	}
 
-	public PointF getLastTouch()
+	public PointF getLastPosition()
 	{
-		return lastTouch;
+		return lastPosition;
 	}
 
-	public void setLastTouch( float x, float y )
+	public void setLastPosition( float x, float y )
 	{
-		this.lastTouch.x = x;
-		this.lastTouch.y = y;
+		this.lastPosition.x = x;
+		this.lastPosition.y = y;
 	}
 
-	public void setLastTouch( MotionEvent event )
+	public void setLastPosition( MotionEvent event )
 	{
-		this.setLastTouch( event.getX(), event.getY() );
+		this.setLastPosition( event.getX(), event.getY() );
 	}
 
 	public float getLastScale()
@@ -205,6 +205,15 @@ public class MultitouchImageView extends ImageView
 		return Math.min( viewWidth / (float) getDrawable().getIntrinsicWidth(), viewHeight / (float) getDrawable().getIntrinsicHeight() );
 	}
 
+	/**
+	 * Get the top or left offset to keep the image centered.
+	 * 
+	 * @param axis
+	 * @param viewSize
+	 * @param drawableSize
+	 * @param scale
+	 * @return
+	 */
 	protected float getOffset( Axis axis, int viewSize, int drawableSize, float scale )
 	{
 		if( axis.equals( Axis.X ) )
@@ -217,6 +226,16 @@ public class MultitouchImageView extends ImageView
 		}
 	}
 
+	/**
+	 * Moves the image from its current position. This method does not accept
+	 * absolute coordinates. The movement has to be specified via relative delta
+	 * values.
+	 * 
+	 * @param deltaX
+	 *            The amount of pixels to move the image on the X-axis.
+	 * @param deltaY
+	 *            The amount of pixels to move the image on the Y-axis.
+	 */
 	public void translate( float deltaX, float deltaY )
 	{
 		matrixValues[Matrix.MTRANS_X] = getTranslation(
@@ -235,7 +254,7 @@ public class MultitouchImageView extends ImageView
 			matrixValues[Matrix.MTRANS_Y],
 			deltaY );
 
-		setLastTouch( getLastTouch().x + deltaX, getLastTouch().y + deltaY );
+		setLastPosition( getLastPosition().x + deltaX, getLastPosition().y + deltaY );
 		getImageMatrix().setValues( matrixValues );
 	}
 
@@ -356,13 +375,13 @@ public class MultitouchImageView extends ImageView
 				{
 					case MotionEvent.ACTION_DOWN:
 						// Store touch position as point on first interaction.
-						setLastTouch( event );
+						setLastPosition( event );
 					break;
 
 					case MotionEvent.ACTION_MOVE:
 						// Translate each movement event into the image matrix
 						// and update the last touched position afterwards.
-						translate( event.getX() - lastTouch.x, event.getY() - lastTouch.y );
+						translate( event.getX() - lastPosition.x, event.getY() - lastPosition.y );
 					break;
 				}
 			}
