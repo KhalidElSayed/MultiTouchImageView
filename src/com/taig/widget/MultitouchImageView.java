@@ -315,15 +315,43 @@ public class MultitouchImageView extends ImageView
 			this.doubleTapDetector = new GestureDetector( context, new GestureDetector.SimpleOnGestureListener()
 			{
 				@Override
-				public void onLongPress( MotionEvent event )
+				public boolean onSingleTapConfirmed( MotionEvent event )
 				{
-					performLongClick();
+					View view = MultitouchImageView.this;
+
+					if( !performClick() )
+					{
+						while( view.getParent() instanceof View )
+						{
+							view = (View) view.getParent();
+
+							if( view.performClick() )
+							{
+								return true;
+							}
+						}
+					}
+					
+					return false;
 				}
 
 				@Override
-				public boolean onSingleTapConfirmed( MotionEvent event )
+				public void onLongPress( MotionEvent event )
 				{
-					return performClick();
+					View view = MultitouchImageView.this;
+
+					if( !performLongClick() )
+					{
+						while( view.getParent() instanceof View )
+						{
+							view = (View) view.getParent();
+
+							if( view.performLongClick() )
+							{
+								return;
+							}
+						}
+					}
 				}
 
 				@Override
