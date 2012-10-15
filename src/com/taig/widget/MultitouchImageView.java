@@ -165,7 +165,7 @@ public class MultitouchImageView extends ImageView
 	public boolean reset()
 	{
 		getImageMatrix().getValues( matrixValues );
-		if( Arrays.equals( matrixValues, initialStateValues ) )
+		if( Arrays.equals( matrixValues, initialStateValues ) || getImageMatrix().isIdentity() )
 		{
 			return false;
 		}
