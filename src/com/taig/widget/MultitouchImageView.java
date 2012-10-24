@@ -1,7 +1,5 @@
 package com.taig.widget;
 
-import java.util.Arrays;
-
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.PointF;
@@ -158,14 +156,14 @@ public class MultitouchImageView extends ImageView
 	/**
 	 * Reset the drawable's position and size to its original condition.
 	 * 
-	 * @return <code>true</code> if the current image matrix has been adjusted
-	 *         to the initial matrix. <code>false</code> if the current image
-	 *         matrix has already been reset.
+	 * @return <code>true</code> if the current image matrix' scale has been
+	 *         adjusted to the initial matrix' scale. <code>false</code> if the
+	 *         current image matrix has already been reset.
 	 */
 	public boolean reset()
 	{
 		getImageMatrix().getValues( matrixValues );
-		if( Arrays.equals( matrixValues, initialStateValues ) || getImageMatrix().isIdentity() )
+		if( matrixValues[Matrix.MSCALE_X] == initialStateValues[Matrix.MSCALE_X] || getImageMatrix().isIdentity() )
 		{
 			return false;
 		}
