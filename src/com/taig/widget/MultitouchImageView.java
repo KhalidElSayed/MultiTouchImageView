@@ -333,7 +333,6 @@ public class MultitouchImageView extends ImageView
 					}
 
 					return true;
-
 				}
 
 				@Override
