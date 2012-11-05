@@ -6,17 +6,34 @@
 	android:orientation="vertical"
 	android:padding="8dp" >
 
-	<Button
-		android:id="@+id/simple"
-		android:layout_width="match_parent"
+	<TextView
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="@string/btn_simple" />
+		android:text="@string/text_view_stretched" />
 
 	<Button
-		android:id="@+id/advanced"
+		android:id="@+id/button_stretched"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/button_stretched" />
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="15dp"
+		android:text="@string/text_view_multitouch" />
+
+	<Button
+		android:id="@+id/button_multitouch_simple"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/button_multitouch_simple" />
+
+	<Button
+		android:id="@+id/button_multitouch_advanced"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="15dp"
-		android:text="@string/btn_advanced" />
+		android:text="@string/button_multitouch_advanced" />
 
 </LinearLayout>

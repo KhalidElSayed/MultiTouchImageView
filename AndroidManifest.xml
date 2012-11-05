@@ -18,8 +18,9 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".app.Simple" />
 		<activity android:name=".app.Advanced" />
+		<activity android:name=".app.Simple" />
+		<activity android:name=".app.Stretched" />
 	</application>
 
 </manifest>

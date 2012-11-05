@@ -16,8 +16,18 @@ public class Main extends Activity
 	{
 		super.onCreate( savedInstanceState );
 		setContentView( R.layout.main );
-		
-		Button simple = (Button) findViewById( R.id.simple );
+
+		Button stretched = (Button) findViewById( R.id.button_stretched );
+		stretched.setOnClickListener( new OnClickListener()
+		{
+			@Override
+			public void onClick( View view )
+			{
+				startActivity( new Intent( Main.this, Stretched.class ) );
+			}
+		} );
+
+		Button simple = (Button) findViewById( R.id.button_multitouch_simple );
 		simple.setOnClickListener( new OnClickListener()
 		{
 			@Override
@@ -26,8 +36,8 @@ public class Main extends Activity
 				startActivity( new Intent( Main.this, Simple.class ) );
 			}
 		} );
-		
-		Button advanced = (Button) findViewById( R.id.advanced );
+
+		Button advanced = (Button) findViewById( R.id.button_multitouch_advanced );
 		advanced.setOnClickListener( new OnClickListener()
 		{
 			@Override
