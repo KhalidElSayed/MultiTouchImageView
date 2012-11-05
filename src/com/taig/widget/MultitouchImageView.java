@@ -1,5 +1,7 @@
 package com.taig.widget;
 
+import java.util.Arrays;
+
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.PointF;
@@ -8,13 +10,12 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
-import android.widget.ImageView;
 
 /**
  * An extension of android's native {@link ImageView} supporting pinch-zoom,
  * double-tap-zoom and exploring the image via drag-gestures.
  */
-public class MultitouchImageView extends ImageView
+public class MultitouchImageView extends StretchedImageView
 {
 	public enum Axis
 	{
@@ -74,15 +75,18 @@ public class MultitouchImageView extends ImageView
 
 	public MultitouchImageView( Context context )
 	{
-		this( context, null );
+		this( context, null, 0 );
 	}
 
 	public MultitouchImageView( Context context, AttributeSet attrs )
 	{
-		super( context, attrs );
+		this( context, attrs, 0 );
+	}
 
-		this.setImageMatrix( new Matrix() );
-		this.setScaleType( ScaleType.MATRIX );
+	public MultitouchImageView( Context context, AttributeSet attrs, int defStyle )
+	{
+		super( context, attrs, defStyle );
+
 		this.touchListener = new TouchListener( context );
 		this.setOnTouchListener( this.touchListener );
 	}
@@ -153,6 +157,24 @@ public class MultitouchImageView extends ImageView
 		this.lastScale = lastScale;
 	}
 
+	@Override
+	protected void onMeasure( int widthMeasureSpec, int heightMeasureSpec )
+	{
+		super.onMeasure( widthMeasureSpec, heightMeasureSpec );
+
+		getImageMatrix().getValues( matrixValues );
+
+		if( !Arrays.equals( matrixValues, initialStateValues ) )
+		{
+			// Use translate method to exploit its functionalities to center the
+			// image.
+			translate( 0, 0 );
+
+			// Store this position as initial position.
+			getImageMatrix().getValues( initialStateValues );
+		}
+	}
+
 	/**
 	 * Reset the drawable's position and size to its original condition.
 	 * 
@@ -163,6 +185,7 @@ public class MultitouchImageView extends ImageView
 	public boolean reset()
 	{
 		getImageMatrix().getValues( matrixValues );
+
 		if( matrixValues[Matrix.MSCALE_X] == initialStateValues[Matrix.MSCALE_X] || getImageMatrix().isIdentity() )
 		{
 			return false;
@@ -173,37 +196,6 @@ public class MultitouchImageView extends ImageView
 			invalidate();
 			return true;
 		}
-	}
-
-	@Override
-	protected void onMeasure( int widthMeasureSpec, int heightMeasureSpec )
-	{
-		int width = MeasureSpec.getSize( widthMeasureSpec );
-		int height = MeasureSpec.getSize( heightMeasureSpec );
-		setMeasuredDimension( width, height );
-
-		if( getDrawable() != null && getImageMatrix().isIdentity() )
-		{
-			getImageMatrix().getValues( matrixValues );
-
-			// Scale image to match parent.
-			scale( getInitialScale( width, height ), 0, 0 );
-
-			// Store this position as initial position.
-			getImageMatrix().getValues( this.initialStateValues );
-		}
-	}
-
-	/**
-	 * Get the initial scale factor to match the parent's width or height.
-	 * 
-	 * @param viewWidth
-	 * @param viewHeight
-	 * @return
-	 */
-	protected float getInitialScale( int viewWidth, int viewHeight )
-	{
-		return Math.min( viewWidth / (float) getDrawable().getIntrinsicWidth(), viewHeight / (float) getDrawable().getIntrinsicHeight() );
 	}
 
 	/**
