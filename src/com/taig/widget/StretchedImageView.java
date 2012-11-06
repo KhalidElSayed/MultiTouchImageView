@@ -20,26 +20,31 @@ public class StretchedImageView extends ImageView
 	public StretchedImageView( Context context, AttributeSet attrs, int defStyle )
 	{
 		super( context, attrs, defStyle );
-		
+
 		this.setImageMatrix( new Matrix() );
 		this.setScaleType( ScaleType.MATRIX );
 	}
-	
+
 	@Override
 	protected void onMeasure( int widthMeasureSpec, int heightMeasureSpec )
 	{
-		int width = MeasureSpec.getSize( widthMeasureSpec );
-		int height = MeasureSpec.getSize( heightMeasureSpec );
-		setMeasuredDimension( width, height );
-
 		if( getDrawable() != null && getImageMatrix().isIdentity() )
 		{
 			// Scale image to match parent.
+			int width = MeasureSpec.getSize( widthMeasureSpec );
+			int height = MeasureSpec.getSize( heightMeasureSpec );
+
 			float scale = getInitialScale( width, height );
 			getImageMatrix().postScale( scale, scale, 0, 0 );
+
+			setMeasuredDimension( (int) ( getDrawable().getIntrinsicWidth() * scale ), (int) ( getDrawable().getIntrinsicHeight() * scale ) );
+		}
+		else
+		{
+			super.onMeasure( widthMeasureSpec, heightMeasureSpec );
 		}
 	}
-	
+
 	/**
 	 * Get the initial scale factor to match the parent's width or height.
 	 * 

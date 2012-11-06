@@ -166,13 +166,15 @@ public class MultitouchImageView extends StretchedImageView
 
 		if( !Arrays.equals( matrixValues, initialStateValues ) )
 		{
-			// Use translate method to exploit its functionalities to center the
-			// image.
-			translate( 0, 0 );
-
 			// Store this position as initial position.
 			getImageMatrix().getValues( initialStateValues );
 		}
+
+		// Use translate method to exploit its functionalities to center the
+		// image.
+		translate( 0, 0 );
+
+		setMeasuredDimension( MeasureSpec.getSize( widthMeasureSpec ), MeasureSpec.getSize( heightMeasureSpec ) );
 	}
 
 	/**
