@@ -1,4 +1,4 @@
-package com.taig.widget;
+package com.taig.multitouch.widget;
 
 import android.content.Context;
 import android.graphics.Matrix;

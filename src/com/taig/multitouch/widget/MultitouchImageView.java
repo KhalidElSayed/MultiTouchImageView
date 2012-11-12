@@ -1,4 +1,4 @@
-package com.taig.widget;
+package com.taig.multitouch.widget;
 
 import java.util.Arrays;
 

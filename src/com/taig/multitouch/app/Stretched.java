@@ -1,19 +1,19 @@
-package com.taig.app;
+package com.taig.multitouch.app;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.taig.R;
-import com.taig.widget.MultitouchImageView;
+import com.taig.multitouch.R;
+import com.taig.multitouch.widget.StretchedImageView;
 
-public class Simple extends Activity
+public class Stretched extends Activity
 {
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
 	{
 		super.onCreate( savedInstanceState );
 
-		MultitouchImageView imageView = new MultitouchImageView( this );
+		StretchedImageView imageView = new StretchedImageView( this );
 		imageView.setImageDrawable( getResources().getDrawable( R.drawable.rick ) );
 
 		setContentView( imageView );

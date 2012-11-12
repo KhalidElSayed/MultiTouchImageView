@@ -1,4 +1,4 @@
-package com.taig.app;
+package com.taig.multitouch.app;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.taig.R;
+import com.taig.multitouch.R;
 
 public class Main extends Activity
 {
