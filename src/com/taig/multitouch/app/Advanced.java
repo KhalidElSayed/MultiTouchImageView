@@ -14,7 +14,7 @@ import com.taig.multitouch.widget.MultitouchImageView;
 
 public class Advanced extends Activity
 {
-	private MultitouchImageView	imageView;
+	private MultitouchImageView imageView;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
@@ -23,11 +23,12 @@ public class Advanced extends Activity
 
 		imageView = new MultitouchImageView( this )
 		{
+
 			@Override
-			protected float getInitialScale( int width, int height )
+			protected float getInitialScale( int viewWidth, int imageWidth, int viewHeight, int imageHeight )
 			{
 				// Stretch image to always fill the view's width.
-				return width / (float) getDrawable().getIntrinsicWidth();
+				return viewWidth / (float) imageWidth;
 			}
 
 			@Override
