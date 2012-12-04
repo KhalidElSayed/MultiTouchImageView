@@ -33,7 +33,7 @@ public class Advanced extends Activity
 			@Override
 			protected float getTranslation( Axis axis, int drawableSize, float scale, int viewSize, float translation, float delta )
 			{
-				// Ignore the 50px on the image's bottom in the calculations (to
+				// Ignore the 60px on the image's bottom in the calculations (to
 				// hide the water mark) and ...
 				if( axis.equals( Axis.Y ) )
 				{
