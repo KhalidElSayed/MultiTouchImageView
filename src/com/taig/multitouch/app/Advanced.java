@@ -10,18 +10,18 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.Toast;
 
 import com.taig.multitouch.R;
-import com.taig.multitouch.widget.MultitouchImageView;
+import com.taig.multitouch.widget.MultiTouchImageView;
 
 public class Advanced extends Activity
 {
-	private MultitouchImageView imageView;
+	private MultiTouchImageView imageView;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
 	{
 		super.onCreate( savedInstanceState );
 
-		imageView = new MultitouchImageView( this )
+		imageView = new MultiTouchImageView( this )
 		{
 
 			@Override
