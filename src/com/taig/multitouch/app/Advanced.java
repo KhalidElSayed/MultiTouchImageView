@@ -8,7 +8,6 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.Toast;
-
 import com.taig.multitouch.R;
 import com.taig.multitouch.widget.MultiTouchImageView;
 
@@ -23,7 +22,6 @@ public class Advanced extends Activity
 
 		imageView = new MultiTouchImageView( this )
 		{
-
 			@Override
 			protected float getInitialScale( int viewWidth, int imageWidth, int viewHeight, int imageHeight )
 			{
