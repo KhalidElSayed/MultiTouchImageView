@@ -1,4 +1,4 @@
-package com.taig.multitouch.widget;
+package com.ninegagr.base.widget;
 
 import android.content.Context;
 import android.graphics.Matrix;
@@ -12,14 +12,14 @@ public class StretchedImageView extends ImageView
 		this( context, null, 0 );
 	}
 
-	public StretchedImageView( Context context, AttributeSet attrs )
+	public StretchedImageView( Context context, AttributeSet attributes )
 	{
-		this( context, attrs, 0 );
+		this( context, attributes, 0 );
 	}
 
-	public StretchedImageView( Context context, AttributeSet attrs, int defStyle )
+	public StretchedImageView( Context context, AttributeSet attributes, int defStyle )
 	{
-		super( context, attrs, defStyle );
+		super( context, attributes, defStyle );
 
 		this.setImageMatrix( new Matrix() );
 		this.setScaleType( ScaleType.MATRIX );
