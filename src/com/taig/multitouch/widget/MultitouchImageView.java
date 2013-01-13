@@ -164,7 +164,7 @@ public class MultitouchImageView extends StretchedImageView
 
 		getImageMatrix().getValues( matrixValues );
 
-		if( !Arrays.equals( matrixValues, initialStateValues ) )
+		if( !Arrays.equals( matrixValues, initialStateValues ) && getDrawable() != null )
 		{
 			// Set dimensions to fill the viewport.
 			setMeasuredDimension( MeasureSpec.getSize( widthMeasureSpec ), MeasureSpec.getSize( heightMeasureSpec ) );
