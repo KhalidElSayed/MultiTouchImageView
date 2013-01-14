@@ -1,4 +1,4 @@
-package com.taig.multitouch.app;
+package com.taig.mt;
 
 import android.app.Activity;
 import android.graphics.Canvas;
@@ -8,8 +8,6 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.Toast;
-import com.taig.multitouch.R;
-import com.taig.multitouch.widget.MultiTouchImageView;
 
 public class Advanced extends Activity
 {
@@ -52,7 +50,7 @@ public class Advanced extends Activity
 			}
 		};
 
-		imageView.setLayoutParams( new LayoutParams( LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT ) );
+		imageView.setLayoutParams( new LayoutParams( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT ) );
 		imageView.setImageDrawable( getResources().getDrawable( R.drawable.porn ) );
 		imageView.setBackgroundColor( getResources().getColor( android.R.color.black ) );
 		imageView.setOnClickListener( new OnClickListener()
