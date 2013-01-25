@@ -2,6 +2,7 @@ package com.taig.mt;
 
 import android.content.Context;
 import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
@@ -28,17 +29,18 @@ public class StretchedImageView extends ImageView
 	@Override
 	protected void onMeasure( int widthMeasureSpec, int heightMeasureSpec )
 	{
-		if( getDrawable() != null && getImageMatrix().isIdentity() )
+		Drawable drawable = getDrawable();
+
+		if( drawable != null && getImageMatrix().isIdentity() )
 		{
 			// Scale image to match parent.
 			float scale = getInitialScale( MeasureSpec.getSize( widthMeasureSpec ),
-										   getDrawable().getIntrinsicWidth(),
+										   drawable.getIntrinsicWidth(),
 										   MeasureSpec.getSize( heightMeasureSpec ),
-										   getDrawable().getIntrinsicHeight() );
+										   drawable.getIntrinsicHeight() );
 			getImageMatrix().postScale( scale, scale, 0, 0 );
 
-			setMeasuredDimension( (int) ( getDrawable().getIntrinsicWidth() * scale ),
-								  (int) ( getDrawable().getIntrinsicHeight() * scale ) );
+			setMeasuredDimension( (int) ( drawable.getIntrinsicWidth() * scale ), (int) ( drawable.getIntrinsicHeight() * scale ) );
 		}
 		else
 		{
