@@ -22,8 +22,8 @@ public class StretchedImageView extends ImageView
 	{
 		super( context, attributes, defStyle );
 
-		this.setImageMatrix( new Matrix() );
-		this.setScaleType( ScaleType.MATRIX );
+		setImageMatrix( new Matrix() );
+		setScaleType( ScaleType.MATRIX );
 	}
 
 	@Override
@@ -31,16 +31,20 @@ public class StretchedImageView extends ImageView
 	{
 		Drawable drawable = getDrawable();
 
-		if( drawable != null && getImageMatrix().isIdentity() )
+		if( drawable != null )
 		{
 			// Scale image to match parent.
 			float scale = getInitialScale( MeasureSpec.getSize( widthMeasureSpec ),
 										   drawable.getIntrinsicWidth(),
 										   MeasureSpec.getSize( heightMeasureSpec ),
 										   drawable.getIntrinsicHeight() );
-			getImageMatrix().postScale( scale, scale, 0, 0 );
 
-			setMeasuredDimension( (int) ( drawable.getIntrinsicWidth() * scale ), (int) ( drawable.getIntrinsicHeight() * scale ) );
+			getImageMatrix().setScale( scale, scale );
+
+			int width = (int) ( drawable.getIntrinsicWidth() * scale );
+			int height = (int) ( drawable.getIntrinsicHeight() * scale );
+
+			setMeasuredDimension( width, height );
 		}
 		else
 		{
@@ -59,6 +63,24 @@ public class StretchedImageView extends ImageView
 	 */
 	protected float getInitialScale( int viewWidth, int imageWidth, int viewHeight, int imageHeight )
 	{
-		return Math.min( viewWidth / (float) imageWidth, viewHeight / (float) imageHeight );
+		float widthScale = viewWidth / (float) imageWidth;
+		float heightScale = viewHeight / (float) imageHeight;
+
+		if( widthScale > 0 && heightScale > 0 )
+		{
+			return Math.min( widthScale, heightScale );
+		}
+		else if( widthScale > 0 && heightScale == 0 )
+		{
+			return widthScale;
+		}
+		else if( widthScale == 0 && heightScale > 0 )
+		{
+			return heightScale;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 }
