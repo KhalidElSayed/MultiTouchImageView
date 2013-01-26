@@ -16,17 +16,17 @@
 	<TextView android:layout_width="wrap_content"
 			  android:layout_height="wrap_content"
 			  android:layout_marginTop="15dp"
-			  android:text="@string/text_view_multitouch" />
+			  android:text="@string/text_view_multi_touch" />
 
 	<Button android:id="@+id/button_multitouch_simple"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:text="@string/button_multitouch_simple" />
+			android:text="@string/button_multi_touch_simple" />
 
 	<Button android:id="@+id/button_multitouch_advanced"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="15dp"
-			android:text="@string/button_multitouch_advanced" />
+			android:text="@string/button_multi_touch_advanced" />
 
 </LinearLayout>
