@@ -20,3 +20,5 @@ like facebook's imageview.
 * Simplify scaling process ([affected code on github] (https://github.com/Taig/MultitouchImageView/blob/master/src/com/taig/widget/MultitouchImageView.java#L174),
 [respective question on stackoverflow] (http://stackoverflow.com/questions/12749802/how-does-matrix-scaling-work))
 * Provide smoother scrolling
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/c03af8039f1657c81ce79a21ca6f96b4 "githalytics.com")](http://githalytics.com/Taig/MultiTouchImageView)
