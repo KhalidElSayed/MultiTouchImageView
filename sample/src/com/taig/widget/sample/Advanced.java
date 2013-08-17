@@ -1,4 +1,4 @@
-package com.taig.mt;
+package com.taig.widget.sample;
 
 import android.app.Activity;
 import android.graphics.Canvas;
@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.Toast;
+import com.taig.widget.MultiTouchImageView;
 
 public class Advanced extends Activity
 {

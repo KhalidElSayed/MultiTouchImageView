@@ -1,7 +1,9 @@
-package com.taig.mt;
+package com.taig.widget.sample;
 
 import android.app.Activity;
 import android.os.Bundle;
+import com.taig.mt.R;
+import com.taig.widget.StretchedImageView;
 
 public class Stretched extends Activity
 {

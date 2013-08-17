@@ -1,4 +1,4 @@
-package com.taig.mt;
+package com.taig.widget.sample;
 
 import android.app.Activity;
 import android.content.Intent;
